@@ -1,0 +1,60 @@
+.contain {
+    padding: 5px;
+}
+
+.notes {
+    width: 150px;
+    position: relative;
+}
+
+.text-btn {
+    margin-left: 400px;
+    position: absolute;
+    margin-top: -50px;
+    right: 0;
+    background: none;
+    font-size: 30px;
+    color:green;
+    border-radius: 40px;
+    border: 0.8px solid #000000;
+    padding: 2px 11px 4px;
+}
+
+
+.list-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    min-height: 200px;
+    margin-top: 70px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.l {
+    padding: 25px;
+    font-size: 20px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    width: 200px;
+    min-height: 200px;
+    text-align: center;
+    word-wrap: break-word;
+    border: 1px solid #000000;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    background: #ffffff;
+    color: red;
+    border-radius: 25px;
+    border: 0.8px solid #000000;
+    padding: 3px 12px;
+    font-size: 35px;
+}
+
