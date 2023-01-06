@@ -15,13 +15,14 @@ export function Addition({onAdd}) {
         let newObject = {id: shortid.generate(), content}
         onAdd(newObject);
         setContent("");
-        let xhr = new XMLHttpRequest();
-        let json = JSON.stringify({'content': content});
-        xhr.open("POST", "http://localhost:7777/notes");
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-        xhr.send(json);
-      };
 
+        return fetch('http://localhost:7777/notes', {
+            method: 'POST',
+            headers: {'content-type': 'application/json;charset=utf-8'},
+            body: JSON.stringify({'content': content})
+        })
+        .then(res => res.text()) 
+      };
     return (
         <div>
             <p className="text">New Note</p>

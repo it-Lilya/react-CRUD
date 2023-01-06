@@ -2,25 +2,21 @@ import React, {useState} from "react";
 import './Basic.css';
 import { Addition } from "../Addition/Addition";
 
-export function Basic () {
+export function Basic() {
     const [result, setResult] = useState([]);
 
     const handleAdd = () => {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:7777/notes");
-        xhr.onload = () => {
-            setResult(JSON.parse(xhr.response))
-        }
-        xhr.send();
+        fetch('http://localhost:7777/notes')
+            .then(response => response.json())
+            .then(data => setResult(data))
     }
-
+    
     const handleDelete = (id) => {
-        let url = "http://localhost:7777/notes/" + id;
-        console.log(url)
-        console.log(result)
+        let url = "http://localhost:7777/notes/" + id.target.id;
         let xhr = new XMLHttpRequest();
         xhr.open("DELETE", url, false);
         xhr.send();
+        handleAdd();
     }
 
     return (
@@ -35,14 +31,12 @@ export function Basic () {
                     <li key={o.id}>
                         <div className="l">
                             {o.content}
-                              <button className="close" onClick={handleDelete(o.id)}>&#215;</button>
-
+                              <button className="close" onClick={handleDelete} id={o.id}>&#215;</button>
                         </div>
                     </li>
                 ))}
             </ul>
             <Addition onAdd={handleAdd} />
-            
         </div>
     )
 }
