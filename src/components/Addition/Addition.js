@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import shortid from "shortid";
 import '../Addition/Addition.css';
 
 export function Addition({onAdd}) {
@@ -11,18 +10,23 @@ export function Addition({onAdd}) {
       };
 
     const addForm = (e) => {
+        
         e.preventDefault();
-        let newObject = {id: shortid.generate(), content}
-        onAdd(newObject);
-        setContent("");
-
-        return fetch('http://localhost:7777/notes', {
-            method: 'POST',
-            headers: {'content-type': 'application/json;charset=utf-8'},
-            body: JSON.stringify({'content': content})
-        })
-        .then(res => res.text()) 
+        const xhr = new XMLHttpRequest();
+        let newObject = JSON.stringify({'content': content});
+        xhr.open('POST', 'http://localhost:7777/notes');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status !== 204) {
+                return false
+            } else {
+                onAdd(newObject);
+                setContent("");
+            }
+        }
+        xhr.send(newObject);
       };
+      
     return (
         <div>
             <p className="text">New Note</p>
